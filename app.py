@@ -1,10 +1,79 @@
-# Import the needed credential and management objects from the libraries.
 import os
 
 from azure.identity import DefaultAzureCredential
 from azure.mgmt.compute import ComputeManagementClient
 from azure.mgmt.network import NetworkManagementClient
 from azure.mgmt.resource import ResourceManagementClient
+
+import random
+
+def generate_random_vmname(length):
+    characters = '0123456789abcdefghijklmnopqrstuvwxyz'
+    return ''.join(random.choices(characters, k=length))
+
+# Retrieve subscription ID from environment variable.
+SUBSCRIPTION_ID = os.environ["AZURE_SUBSCRIPTION_ID"]
+
+# Constants we need in multiple places: the resource group name and
+# the region in which we provision resources. You can change these
+# values however you want.
+RESOURCE_GROUP_NAME = "blast"
+LOCATION = "westeurope"
+
+# Network and IP address names
+VM_NAME = generate_random_vmname(10)
+
+VNET_NAME = f"{VM_NAME}-vnet"
+SUBNET_NAME = f"{VM_NAME}-subnet"
+IP_NAME = f"{VM_NAME}-ip"
+IP_CONFIG_NAME = f"{VM_NAME}-ip-config"
+NIC_NAME = f"{VM_NAME}-nic"
+NSG_NAME = 'blast-nsg'
+
+USERNAME = "azureuser"
+PASSWORD = "ChangePa$$w0rd24"
+
+def get_nsg_id_by_name(subscription_id, resource_group_name, nsg_name):
+    credential = DefaultAzureCredential()
+    network_client = NetworkManagementClient(credential, subscription_id)
+    network_client._config.enable_http_logger = True
+
+    nsg = network_client.network_security_groups.get(
+        resource_group_name,
+        nsg_name
+    )
+
+    return nsg.id if nsg else None
+
+def associate_vm_with_nsg(subscription_id, resource_group_name, vm_name, nsg_id):
+    credential = DefaultAzureCredential()
+    compute_client = ComputeManagementClient(credential, subscription_id)
+    network_client = NetworkManagementClient(credential, subscription_id)
+    network_client._config.enable_http_logger = True
+
+    # Get the VM
+    vm = compute_client.virtual_machines.get(resource_group_name, vm_name)
+
+    # Get the NIC ID of the VM
+    nic_id = vm.network_profile.network_interfaces[0].id
+
+    print(f'nic_id = {nic_id}')
+
+    try:
+        # Attempt to get the NIC
+
+        # Get the NIC name from the NIC ID
+        nic_name = nic_id.split('/')[-1]
+
+        # Get the NIC
+        nic = network_client.network_interfaces.get(resource_group_name, nic_name)
+        
+        # Update the NIC with the NSG
+        nic.network_security_group = {'id': nsg_id}
+        nic = network_client.network_interfaces.begin_create_or_update(resource_group_name, nic_name, nic).result()
+        print(f"VM '{vm_name}' associated with NSG '{nsg_id}'.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
 
 print(
     "Provisioning a virtual machine...some operations might take a \
@@ -14,20 +83,10 @@ minute or two."
 # Acquire a credential object.
 credential = DefaultAzureCredential()
 
-# Retrieve subscription ID from environment variable.
-subscription_id = os.environ["AZURE_SUBSCRIPTION_ID"]
-
-
 # Step 1: Provision a resource group
 
 # Obtain the management object for resources.
-resource_client = ResourceManagementClient(credential, subscription_id)
-
-# Constants we need in multiple places: the resource group name and
-# the region in which we provision resources. You can change these
-# values however you want.
-RESOURCE_GROUP_NAME = "blast"
-LOCATION = "westeurope"
+resource_client = ResourceManagementClient(credential, SUBSCRIPTION_ID)
 
 # Provision the resource group.
 rg_result = resource_client.resource_groups.create_or_update(RESOURCE_GROUP_NAME, {"location": LOCATION})
@@ -45,15 +104,8 @@ print(f"Provisioned resource group {rg_result.name} in the {rg_result.location} 
 # Therefore we must provision these downstream components first, then
 # provision the NIC, after which we can provision the VM.
 
-# Network and IP address names
-VNET_NAME = "python-example-vnet"
-SUBNET_NAME = "python-example-subnet"
-IP_NAME = "python-example-ip"
-IP_CONFIG_NAME = "python-example-ip-config"
-NIC_NAME = "python-example-nic"
-
 # Obtain the management object for networks
-network_client = NetworkManagementClient(credential, subscription_id)
+network_client = NetworkManagementClient(credential, SUBSCRIPTION_ID)
 
 # Provision the virtual network and wait for completion
 poller = network_client.virtual_networks.begin_create_or_update(
@@ -125,11 +177,7 @@ print(f"Provisioned network interface client {nic_result.name}")
 # Step 6: Provision the virtual machine
 
 # Obtain the management object for virtual machines
-compute_client = ComputeManagementClient(credential, subscription_id)
-
-VM_NAME = "ExampleVM"
-USERNAME = "azureuser"
-PASSWORD = "ChangePa$$w0rd24"
+compute_client = ComputeManagementClient(credential, SUBSCRIPTION_ID)
 
 print(
     f"Provisioning virtual machine {VM_NAME}; this operation might \
@@ -148,8 +196,8 @@ poller = compute_client.virtual_machines.begin_create_or_update(
         "storage_profile": {
             "image_reference": {
                 "publisher": "Canonical",
-                "offer": "UbuntuServer",
-                "sku": "16.04.0-LTS",
+                "offer": "0001-com-ubuntu-server-jammy",
+                "sku": "22_04-lts-gen2",
                 "version": "latest",
             }
         },
@@ -172,3 +220,7 @@ poller = compute_client.virtual_machines.begin_create_or_update(
 vm_result = poller.result()
 
 print(f"Provisioned virtual machine {vm_result.name}")
+
+# Associate with the NSG
+nsg_id = get_nsg_id_by_name(SUBSCRIPTION_ID, RESOURCE_GROUP_NAME, NSG_NAME)
+associate_vm_with_nsg(SUBSCRIPTION_ID, RESOURCE_GROUP_NAME, VM_NAME, nsg_id)

@@ -57,8 +57,6 @@ def associate_vm_with_nsg(subscription_id, resource_group_name, vm_name, nsg_id)
     # Get the NIC ID of the VM
     nic_id = vm.network_profile.network_interfaces[0].id
 
-    print(f'nic_id = {nic_id}')
-
     try:
         # Attempt to get the NIC
 
@@ -224,3 +222,7 @@ print(f"Provisioned virtual machine {vm_result.name}")
 # Associate with the NSG
 nsg_id = get_nsg_id_by_name(SUBSCRIPTION_ID, RESOURCE_GROUP_NAME, NSG_NAME)
 associate_vm_with_nsg(SUBSCRIPTION_ID, RESOURCE_GROUP_NAME, VM_NAME, nsg_id)
+
+# Install docker on the machine
+from dockerize import setup_and_run
+setup_and_run(ip_address_result.ip_address, USERNAME, PASSWORD)

@@ -25,6 +25,28 @@ def create_nsg(subscription_id, resource_group_name, nsg_name, location):
                 'access': 'Allow',
                 'priority': 100,
                 'direction': 'Inbound'
+            },
+            {
+                'name': 'AllowHTTP',
+                'protocol': 'Tcp',
+                'source_port_range': '*',
+                'destination_port_range': '80',
+                'source_address_prefix': '*',
+                'destination_address_prefix': '*',
+                'access': 'Allow',
+                'priority': 101,
+                'direction': 'Inbound'
+            },
+            {
+                'name': 'AllowHTTPS',
+                'protocol': 'Tcp',
+                'source_port_range': '*',
+                'destination_port_range': '443',
+                'source_address_prefix': '*',
+                'destination_address_prefix': '*',
+                'access': 'Allow',
+                'priority': 102,
+                'direction': 'Inbound'
             }
         ]
     }
@@ -37,6 +59,5 @@ def create_nsg(subscription_id, resource_group_name, nsg_name, location):
     ).result()
 
     print(f"Network Security Group '{nsg.name}' created successfully.")
-
 
 create_nsg(SUBSCRIPTION_ID, RESOURCE_GROUP_NAME, NSG_NAME, LOCATIONS)

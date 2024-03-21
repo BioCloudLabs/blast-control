@@ -37,7 +37,7 @@ def run_blast(server_ip, username, password):
         print(stderr.read().decode('utf-8'))
 
         # Start docker container
-        _, stdout, stderr = ssh.exec_command('sudo DEBIAN_FRONTEND=noninteractive docker-compose -f blast/docker-compose.yml up --build')
+        _, stdout, stderr = ssh.exec_command('sudo DEBIAN_FRONTEND=noninteractive docker-compose -f blast/docker-compose.yaml up --build')
         print(stdout.read().decode('utf-8'))
         print(stderr.read().decode('utf-8'))
 

@@ -1,7 +1,5 @@
 import paramiko
 
-import paramiko
-
 def install_docker(server_ip, username, password):
     ssh = paramiko.SSHClient()
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())

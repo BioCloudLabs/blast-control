@@ -4,8 +4,10 @@ from azure.identity import DefaultAzureCredential
 from azure.mgmt.compute import ComputeManagementClient
 from azure.mgmt.network import NetworkManagementClient
 from azure.mgmt.resource import ResourceManagementClient
-
+from dotenv import load_dotenv
 import random
+
+load_dotenv()
 
 def generate_random_vmname(length):
     characters = '0123456789abcdefghijklmnopqrstuvwxyz'
@@ -223,6 +225,13 @@ print(f"Provisioned virtual machine {vm_result.name}")
 nsg_id = get_nsg_id_by_name(SUBSCRIPTION_ID, RESOURCE_GROUP_NAME, NSG_NAME)
 associate_vm_with_nsg(SUBSCRIPTION_ID, RESOURCE_GROUP_NAME, VM_NAME, nsg_id)
 
+# Create cloudflare record
+from dns_managment import create_record
+
+CLOUDFLARE_TOKEN = os.environ["CLOUDFLARE_TOKEN"]
+create_record(CLOUDFLARE_TOKEN, vm_result.name, ip_address_result.ip_address)
+
 # Install docker on the machine
 from dockerize import setup_and_run
 setup_and_run(ip_address_result.ip_address, USERNAME, PASSWORD)
+

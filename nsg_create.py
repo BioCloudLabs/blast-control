@@ -38,6 +38,17 @@ def create_nsg(subscription_id, resource_group_name, nsg_name, location):
                 'direction': 'Inbound'
             },
             {
+                'name': 'AllowFlask',
+                'protocol': 'Tcp',
+                'source_port_range': '*',
+                'destination_port_range': '5000',
+                'source_address_prefix': '*',
+                'destination_address_prefix': '*',
+                'access': 'Allow',
+                'priority': 102,
+                'direction': 'Inbound'
+            },
+            {
                 'name': 'AllowHTTPS',
                 'protocol': 'Tcp',
                 'source_port_range': '*',
@@ -45,7 +56,7 @@ def create_nsg(subscription_id, resource_group_name, nsg_name, location):
                 'source_address_prefix': '*',
                 'destination_address_prefix': '*',
                 'access': 'Allow',
-                'priority': 102,
+                'priority': 103,
                 'direction': 'Inbound'
             }
         ]

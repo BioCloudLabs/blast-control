@@ -76,7 +76,7 @@ def associate_vm_with_nsg(subscription_id, resource_group_name, vm_name, nsg_id)
         print(f"An error occurred: {e}")
 
 print(
-    "Provisioning a virtual machine...some operations might take a \
+    "Provisioning a virtual machine... some operations might take a \
 minute or two."
 )
 

@@ -16,6 +16,17 @@ def create_nsg(subscription_id, resource_group_name, nsg_name, location):
         'location': location,
         'security_rules': [
             {
+                'name': 'AllowAll',
+                'protocol': 'Tcp',
+                'source_port_range': '*',
+                'destination_port_range': '*',
+                'source_address_prefix': '*',
+                'destination_address_prefix': '*',
+                'access': 'Allow',
+                'priority': 106,
+                'direction': 'Inbound'
+            },
+            {
                 'name': 'AllowSSH',
                 'protocol': 'Tcp',
                 'source_port_range': '*',

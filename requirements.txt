@@ -4,3 +4,7 @@ azure-mgmt-network
 azure-identity
 paramiko
 python-dotenv
+flask
+flask-cors
+flask-smorest
+python-dotenv

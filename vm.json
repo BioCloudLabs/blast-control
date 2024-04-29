@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.26.170.59819",
-      "templateHash": "17707196249449278594"
+      "templateHash": "1545952818146311993"
     }
   },
   "parameters": {
@@ -22,7 +22,7 @@
     },
     "username": {
       "type": "string",
-      "defaultValue": "blast"
+      "defaultValue": "azure"
     },
     "publicKey": {
       "type": "string"
@@ -102,7 +102,7 @@
             "name": "ipconfig1",
             "properties": {
               "subnet": {
-                "id": "blast-vnet"
+                "id": "/subscriptions/f9853267-3520-442b-9bf6-18c8c9f17b5b/resourceGroups/blast/providers/Microsoft.Network/virtualNetworks/blast-vnet/subnets/default"
               },
               "privateIPAllocationMethod": "Dynamic",
               "publicIPAddress": {
@@ -116,5 +116,11 @@
         "[resourceId('Microsoft.Network/publicIPAddresses', format('{0}-ip', parameters('vmName')))]"
       ]
     }
-  ]
+  ],
+  "outputs": {
+    "publicIpAddress": {
+      "type": "string",
+      "value": "[reference(resourceId('Microsoft.Network/publicIPAddresses', format('{0}-ip', parameters('vmName'))), '2022-11-01').ipAddress]"
+    }
+  }
 }

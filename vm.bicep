@@ -3,31 +3,10 @@ param location string = 'westeurope'
 @description('The name of your virtual machine.')
 param vmName string = 'blast-1'
 
-param username string = 'blast'
+param username string = 'azure'
 
 // TODO use File
 param publicKey string
-
-// // https://docs.microsoft.com/en-us/azure/templates/microsoft.network/virtualnetworks?tabs=bicep
-// resource vnet 'Microsoft.Network/virtualNetworks@2022-11-01' = {
-//   name: '${location}-vnet'
-//   location: location
-//   properties: {
-//     addressSpace: {
-//       addressPrefixes: [
-//         '10.1.0.0/16'
-//       ]
-//     }
-//     subnets: [
-//       {
-//         name: '${location}-vnet-1'
-//         properties: {
-//           addressPrefix: '10.1.1.0/24'
-//         }
-//       }
-//     ]
-//   }
-// }
 
 resource ip 'Microsoft.Network/publicIPAddresses@2022-11-01' = {
   name: '${vmName}-ip'
@@ -99,7 +78,7 @@ resource nic 'Microsoft.Network/networkInterfaces@2022-11-01' = {
         name: 'ipconfig1'
         properties: {
           subnet: {
-            id: 'blast-vnet'
+            id: '/subscriptions/f9853267-3520-442b-9bf6-18c8c9f17b5b/resourceGroups/blast/providers/Microsoft.Network/virtualNetworks/blast-vnet/subnets/default'
           }
           privateIPAllocationMethod: 'Dynamic'
           publicIPAddress:  {
@@ -110,4 +89,3 @@ resource nic 'Microsoft.Network/networkInterfaces@2022-11-01' = {
     ]
   }
 }
-

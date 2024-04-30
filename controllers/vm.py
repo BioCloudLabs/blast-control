@@ -1,6 +1,7 @@
 from flask_smorest import Blueprint, abort
 from flask.views import MethodView
 from azure.mgmt.compute import ComputeManagementClient
+from dns_managment import create_record
 from azure.mgmt.network import NetworkManagementClient
 from azure.identity import AzureCliCredential
 from azure.mgmt.resource import ResourceManagementClient
@@ -142,6 +143,8 @@ subscription_id = os.environ["AZURE_SUBSCRIPTION_ID"]
 
 resource_client = ResourceManagementClient(credential, subscription_id)
 
+CLOUDFLARE_TOKEN = os.getenv("CLOUDFLARE_TOKEN")
+
 @blp.route("/setup")
 class SetupVm(MethodView):
     def get(self):
@@ -151,6 +154,7 @@ class SetupVm(MethodView):
         :return: HTTP response with the login result.
         """
 
+        # vm_name = generate_random_vmname(10)
         vm_name = "blast-1"
 
         try:
@@ -187,4 +191,10 @@ class SetupVm(MethodView):
         except Exception as e:
             abort(500, message=f"An error ocurred while creating a vm: {str(e)}")
 
-        return {"ip": public_ip_address.ip_address}, 200
+        try:
+            dns = create_record(CLOUDFLARE_TOKEN, vm_name, public_ip_address.ip_address)
+            print(dns)
+        except Exception as e:
+            abort(500, message=f"An error ocurred while creating vm dns records: {str(e)}")
+
+        return {"ip": public_ip_address.ip_address, "dns": dns}, 200

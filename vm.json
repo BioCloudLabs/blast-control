@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.26.170.59819",
-      "templateHash": "1545952818146311993"
+      "templateHash": "951129947329205422"
     }
   },
   "parameters": {
@@ -55,7 +55,7 @@
           "osDisk": {
             "createOption": "FromImage",
             "managedDisk": {
-              "storageAccountType": "Standard_LRS"
+              "storageAccountType": "Premium_LRS"
             }
           },
           "imageReference": {
@@ -116,11 +116,5 @@
         "[resourceId('Microsoft.Network/publicIPAddresses', format('{0}-ip', parameters('vmName')))]"
       ]
     }
-  ],
-  "outputs": {
-    "publicIpAddress": {
-      "type": "string",
-      "value": "[reference(resourceId('Microsoft.Network/publicIPAddresses', format('{0}-ip', parameters('vmName'))), '2022-11-01').ipAddress]"
-    }
-  }
+  ]
 }

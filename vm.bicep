@@ -20,10 +20,6 @@ resource ip 'Microsoft.Network/publicIPAddresses@2022-11-01' = {
   }
 }
 
-//https://learn.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-bicep?tabs=CLI
-
-// https://learn.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachines?pivots=deployment-language-bicep
-
 resource vm 'Microsoft.Compute/virtualMachines@2023-03-01' = {
   name: '${vmName}-vm'
   location: location
@@ -35,7 +31,7 @@ resource vm 'Microsoft.Compute/virtualMachines@2023-03-01' = {
       osDisk: {
         createOption: 'FromImage'
         managedDisk: {
-          storageAccountType: 'Standard_LRS'
+          storageAccountType: 'Premium_LRS'
         }
       }
       imageReference: {

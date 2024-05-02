@@ -2,6 +2,7 @@ from flask_smorest import Blueprint, abort
 from flask.views import MethodView
 from azure.mgmt.compute import ComputeManagementClient
 from dns_managment import create_record
+from dockerize import setup_and_run
 from azure.mgmt.network import NetworkManagementClient
 from azure.identity import AzureCliCredential
 from azure.mgmt.resource import ResourceManagementClient
@@ -22,7 +23,7 @@ TEMPLATE_BODY = {
     "_generator": {
       "name": "bicep",
       "version": "0.26.170.59819",
-      "templateHash": "1545952818146311993"
+      "templateHash": "951129947329205422"
     }
   },
   "parameters": {
@@ -72,7 +73,7 @@ TEMPLATE_BODY = {
           "osDisk": {
             "createOption": "FromImage",
             "managedDisk": {
-              "storageAccountType": "Standard_LRS"
+              "storageAccountType": "Premium_LRS"
             }
           },
           "imageReference": {
@@ -155,7 +156,7 @@ class SetupVm(MethodView):
         """
 
         # vm_name = generate_random_vmname(10)
-        vm_name = "blast-1"
+        vm_name = "blast-4"
 
         try:
             rg_deployment_result = resource_client.deployments.begin_create_or_update(
@@ -196,5 +197,7 @@ class SetupVm(MethodView):
             print(dns)
         except Exception as e:
             abort(500, message=f"An error ocurred while creating vm dns records: {str(e)}")
+
+        # setup_and_run(public_ip_address.ip_address)
 
         return {"ip": public_ip_address.ip_address, "dns": dns}, 200

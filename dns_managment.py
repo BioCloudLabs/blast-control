@@ -17,8 +17,8 @@ def create_record(api_token, record_name, record_content, record_type='A', ttl=1
     response = requests.post(url, headers=headers, json=data)
     print(response.text)
 
-    if "errors" in response.json():
-        raise Exception(f"Failed to create DNS record. Status code: {response.status_code}")
+    # if "errors" in response.json():
+    #     raise Exception(f"Failed to create DNS record. Status code: {response.status_code}")
 
     if response.status_code == 200:
         print(f"DNS record created successfully. Assigned ip http://{record_name}.biocloudlabs.es/ to ip {record_content}")

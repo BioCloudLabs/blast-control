@@ -17,7 +17,7 @@ def install_docker(server_ip):
         print(stdout.read().decode('utf-8'))
         print(stderr.read().decode('utf-8'))
         
-        print(f'Docker on {server_ip} was installed successfully.')
+        return {"message": f'Docker on {server_ip} was installed successfully.'}
     except Exception as e:
         return {"error": f"An error occurred: {str(e)}"}
     finally:
@@ -52,5 +52,7 @@ def run_blast(server_ip):
         ssh.close()
 
 def setup_and_run(server_ip):
-    install_docker(server_ip)
-    run_blast(server_ip)
+    install_docker_output = install_docker(server_ip)
+    if "error" in install_docker_output:
+        return install_docker_output
+    return run_blast(server_ip)

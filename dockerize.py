@@ -19,7 +19,7 @@ def install_docker(server_ip):
         
         print(f'Docker on {server_ip} was installed successfully.')
     except Exception as e:
-        print(f"An error occurred: {str(e)}")
+        return {"error": f"An error occurred: {str(e)}"}
     finally:
         ssh.close()
 
@@ -45,9 +45,9 @@ def run_blast(server_ip):
         print(stdout.read().decode('utf-8'))
         print(stderr.read().decode('utf-8'))
 
-        print(f'Docker container {server_ip} it\'s now running.')
+        return {"message": f'Docker container {server_ip} it\'s now running.'}
     except Exception as e:
-        print(f"An error occurred: {str(e)}")
+        return {"error": f"An error occurred: {str(e)}"}
     finally:
         ssh.close()
 

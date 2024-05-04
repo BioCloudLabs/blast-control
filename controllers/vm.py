@@ -228,6 +228,9 @@ class SetupVm(MethodView):
         except Exception as e:
             abort(500, message=f"An error ocurred while creating vm dns records: {str(e)}")
 
-        setup_and_run(public_ip_address.ip_address)
+        output = setup_and_run(public_ip_address.ip_address)
+
+        if "error" in output:
+            abort(500, message=f"An error ocurred while running the vm: {output['error']}")
 
         return {"ip": public_ip_address.ip_address, "dns": dns}, 200

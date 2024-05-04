@@ -8,6 +8,11 @@ param username string = 'azure'
 // TODO use File
 param publicKey string
 
+@description('File uris')
+param fileUris array = [
+  'https://biocloudlabs.blob.core.windows.net/certs/biocloudlabs.cer', 'https://biocloudlabs.blob.core.windows.net/certs/biocloudlabs.key'
+]
+
 resource ip 'Microsoft.Network/publicIPAddresses@2022-11-01' = {
   name: '${vmName}-ip'
   location: location
@@ -83,5 +88,21 @@ resource nic 'Microsoft.Network/networkInterfaces@2022-11-01' = {
         }
       }
     ]
+  }
+}
+
+resource vmExtension 'Microsoft.Compute/virtualMachines/extensions@2023-03-01' = {
+  parent: vm
+  name: 'CustomScript'
+  location: location
+  properties: {
+    publisher: 'Microsoft.Azure.Extensions'
+    type: 'CustomScript'
+    typeHandlerVersion: '2.1'
+    autoUpgradeMinorVersion: true
+    settings: {
+      fileUris: fileUris
+      commandToExecute: 'cp biocloudlabs.cer /home/azure/ && cp biocloudlabs.key /home/azure/'
+    }
   }
 }

@@ -35,17 +35,13 @@ def run_blast(server_ip):
         print(stdout.read().decode('utf-8'))
         print(stderr.read().decode('utf-8'))
 
-        # _, stdout, stderr = ssh.exec_command(f'sudo DEBIAN_FRONTEND=noninteractive scp /home/christiangoac/biocloudlabs.cer azure@{server_ip}:/home/azure/biocloudlabs.cer')
-        # print(stdout.read().decode('utf-8'))
-        # print(stderr.read().decode('utf-8'))
+        # Build docker image
+        _, stdout, stderr = ssh.exec_command('sudo DEBIAN_FRONTEND=noninteractive docker-compose -f blast/docker-compose.yml build')
+        print(stdout.read().decode('utf-8'))
+        print(stderr.read().decode('utf-8'))
 
-        # _, stdout, stderr = ssh.exec_command(f'sudo DEBIAN_FRONTEND=noninteractive scp /home/christiangoac/biocloudlabs.key azure@{server_ip}:/home/azure/biocloudlabs.key')
-        # print(stdout.read().decode('utf-8'))
-        # print(stderr.read().decode('utf-8'))
-
-
-        # Start docker container
-        _, stdout, stderr = ssh.exec_command('sudo DEBIAN_FRONTEND=noninteractive SERVER_NAME=blast-2.biocloudlabs.es docker-compose -f blast/docker-compose.yml up --build')
+        # Start docker container in detached mode
+        _, stdout, stderr = ssh.exec_command('sudo DEBIAN_FRONTEND=noninteractive docker-compose -f blast/docker-compose.yml up -d')
         print(stdout.read().decode('utf-8'))
         print(stderr.read().decode('utf-8'))
 

@@ -3,7 +3,7 @@ import requests
 def create_record(api_token, record_name, record_content, record_type='A', ttl=1):
     url = "https://api.cloudflare.com/client/v4/zones/de4b843d0fb20d24d1203b01df3237f1/dns_records"
     headers = {
-        'Authorization': f'Bearer {api_token}',
+        'Authorization': f'Bearer 17_myG2zRPCPCXdo8yGA-boxNtGWiqB6AEESRbTC',
         'Content-Type': 'application/json'
     }
     data = {
@@ -22,7 +22,7 @@ def create_record(api_token, record_name, record_content, record_type='A', ttl=1
 
     if response.status_code == 200:
         print(f"DNS record created successfully. Assigned ip http://{record_name}.biocloudlabs.es/ to ip {record_content}")
-        return f"http://{record_name}.biocloudlabs.es/"
+        return f"{record_name}.biocloudlabs.es"
     else:
         raise Exception(f"Failed to create DNS record. Status code: {response.status_code}")
 

@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.26.170.59819",
-      "templateHash": "951129947329205422"
+      "templateHash": "9949954594782303465"
     }
   },
   "parameters": {
@@ -26,6 +26,16 @@
     },
     "publicKey": {
       "type": "string"
+    },
+    "fileUris": {
+      "type": "array",
+      "defaultValue": [
+        "https://biocloudlabs.blob.core.windows.net/certs/biocloudlabs.cer",
+        "https://biocloudlabs.blob.core.windows.net/certs/biocloudlabs.key"
+      ],
+      "metadata": {
+        "description": "File uris"
+      }
     }
   },
   "resources": [
@@ -114,6 +124,25 @@
       },
       "dependsOn": [
         "[resourceId('Microsoft.Network/publicIPAddresses', format('{0}-ip', parameters('vmName')))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Compute/virtualMachines/extensions",
+      "apiVersion": "2023-03-01",
+      "name": "[format('{0}/{1}', format('{0}-vm', parameters('vmName')), 'CustomScript')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "publisher": "Microsoft.Azure.Extensions",
+        "type": "CustomScript",
+        "typeHandlerVersion": "2.1",
+        "autoUpgradeMinorVersion": true,
+        "settings": {
+          "fileUris": "[parameters('fileUris')]",
+          "commandToExecute": "cp biocloudlabs.cer /home/azure/ && cp biocloudlabs.key /home/azure/"
+        }
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Compute/virtualMachines', format('{0}-vm', parameters('vmName')))]"
       ]
     }
   ]

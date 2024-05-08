@@ -166,12 +166,13 @@ TEMPLATE_BODY = {
   ]
 }
 
-# PUB_SSH_KEY = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDWWyknEkUUNpKWH3LkmEi1x0s0x08wJHswnUxB4GuhT4jG6ZoePiZxPgGD14cahYp/dRgRgCFIvyYwCSj6vpo9yiQtbaUdu38X/xmHv9A1ssYA6mJceXoXmVHGhrhY9HT4Y7a6KKqAWzMxU69TQI90hcfl8OAxy3A1woIt2Pa6B4OvZAUN1/+YH873UOMoGaUlhYqbr12qU6UrTlxIOfSDTzejamkNCLNaokraOoM3Cx9YB6Lw4oOTk7MnWwNeT/pr4OftOdCRpaHO7mhWJoNmohWgmLA1Dnbv/MHRGsy/2KH0aRNfkPNzzc7UwxHId7IO76CbC9xF6u2wbz8qwBRrDWNKm6lp5iBs5nVbs2FxyAgeYKAcQQV4s9CN7kyiRmFy7XeDN5taAYLyXQZBEu9VqYdwkm9MQJ0S34ZYETjwS6ztP4bMOiOcCqtUKzzyGY16jSdZqj3Weg6pcMTcsOAO7XLcrE0KIVCK3xsafJ8vjTpRNnlM7wmE4iBZNuHmL1U= christiangoac@DESKTOP-VFSDTV4"
-PUB_SSH_KEY = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCre8XAET+6Z+UUI0qtDU++TW1yxq0/WtcTLBiKbRDOgwC5o+sxkTdRRbtqZWIRi6tYWMZhkJD01vGVo5QL+ZOaVu8CplnZRHoq5rqKunE24zSvfiUpLtFIzjfAhyWW7vfIp1MSnoLZ6nvJ+jale9SmZsBuDlPkPE8qTJFJvriIMHZURQsKrrVAHeUMhyKmzLioCAK5vBz59P8jjjYG0NNv5yIv1X4S7VikfUYBSZjxmXi6UZE878KJMtKVU1+EFCv45zbVQ+OoJLs12/IaBr+yrxwuX4jsTWQkkn5oUxj+r/lq9uqIye8auj2UlofNaXxGUmCa1dmDzfFH6pc+W3QQ++0dhO3koXbP43md1eHpSn/C9c4Vfnp6XjZGrn5bUrtgMXKpXMqfFha615+2sELp1ZHrwIKz5rJbBO+9ptX7kv24YFVhsMLSNs63uMxsew2T2+JtfFK7P9ACcXoH79TvADMbwJyp9SQOPfw3fCdzfEYzfJ36DGsPYH13fEWF7Hs= christiangoac@CHRISGOAC-PC"
+PUB_SSH_KEY = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDWWyknEkUUNpKWH3LkmEi1x0s0x08wJHswnUxB4GuhT4jG6ZoePiZxPgGD14cahYp/dRgRgCFIvyYwCSj6vpo9yiQtbaUdu38X/xmHv9A1ssYA6mJceXoXmVHGhrhY9HT4Y7a6KKqAWzMxU69TQI90hcfl8OAxy3A1woIt2Pa6B4OvZAUN1/+YH873UOMoGaUlhYqbr12qU6UrTlxIOfSDTzejamkNCLNaokraOoM3Cx9YB6Lw4oOTk7MnWwNeT/pr4OftOdCRpaHO7mhWJoNmohWgmLA1Dnbv/MHRGsy/2KH0aRNfkPNzzc7UwxHId7IO76CbC9xF6u2wbz8qwBRrDWNKm6lp5iBs5nVbs2FxyAgeYKAcQQV4s9CN7kyiRmFy7XeDN5taAYLyXQZBEu9VqYdwkm9MQJ0S34ZYETjwS6ztP4bMOiOcCqtUKzzyGY16jSdZqj3Weg6pcMTcsOAO7XLcrE0KIVCK3xsafJ8vjTpRNnlM7wmE4iBZNuHmL1U= christiangoac@DESKTOP-VFSDTV4"
+# PUB_SSH_KEY = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCre8XAET+6Z+UUI0qtDU++TW1yxq0/WtcTLBiKbRDOgwC5o+sxkTdRRbtqZWIRi6tYWMZhkJD01vGVo5QL+ZOaVu8CplnZRHoq5rqKunE24zSvfiUpLtFIzjfAhyWW7vfIp1MSnoLZ6nvJ+jale9SmZsBuDlPkPE8qTJFJvriIMHZURQsKrrVAHeUMhyKmzLioCAK5vBz59P8jjjYG0NNv5yIv1X4S7VikfUYBSZjxmXi6UZE878KJMtKVU1+EFCv45zbVQ+OoJLs12/IaBr+yrxwuX4jsTWQkkn5oUxj+r/lq9uqIye8auj2UlofNaXxGUmCa1dmDzfFH6pc+W3QQ++0dhO3koXbP43md1eHpSn/C9c4Vfnp6XjZGrn5bUrtgMXKpXMqfFha615+2sELp1ZHrwIKz5rJbBO+9ptX7kv24YFVhsMLSNs63uMxsew2T2+JtfFK7P9ACcXoH79TvADMbwJyp9SQOPfw3fCdzfEYzfJ36DGsPYH13fEWF7Hs= christiangoac@CHRISGOAC-PC"
 
 credential = AzureCliCredential()
 subscription_id = os.environ["AZURE_SUBSCRIPTION_ID"]
-
+compute_client = ComputeManagementClient(credential, subscription_id)
+network_client = NetworkManagementClient(credential, subscription_id)
 resource_client = ResourceManagementClient(credential, subscription_id)
 
 CLOUDFLARE_TOKEN = os.getenv("CLOUDFLARE_TOKEN")
@@ -186,7 +187,6 @@ class SetupVm(MethodView):
         """
 
         vm_name = generate_random_vmname(10)
-        # vm_name = "blast-5"
 
         try:
             rg_deployment_result = resource_client.deployments.begin_create_or_update(
@@ -216,7 +216,6 @@ class SetupVm(MethodView):
 
             rg_deployment_result.wait()
 
-            network_client = NetworkManagementClient(credential, subscription_id)
             public_ip_address = network_client.public_ip_addresses.get('blast', vm_name + '-ip')
 
         except Exception as e:
@@ -234,3 +233,61 @@ class SetupVm(MethodView):
             abort(500, message=f"An error ocurred while running the vm: {output['error']}")
 
         return {"ip": public_ip_address.ip_address, "dns": dns}, 200
+    
+@blp.route("/poweroff/<vm_name>")
+class PowerOffVm(MethodView):
+    def get(self, vm_name):
+        """
+        API Endpoint to erase a vm.
+
+        :return: HTTP response with the login result.
+        """
+
+        try:
+            # network_interface = network_client.network_interfaces.get('blast', vm_name + "-nic")
+
+            # for config in network_interface.ip_configurations:
+            #     config.public_ip_address = None
+
+            # network_client.network_interfaces.begin_create_or_update('blast', vm_name + "-nic", network_interface)
+
+            # async_ip_delete = network_client.public_ip_addresses.begin_delete('blast', vm_name + "-ip")
+            # async_ip_delete.wait()
+
+            # disk_name = vm.storage_profile.os_disk.name
+            # async_disk_delete = compute_client.disks.begin_delete('blast', disk_name)
+            # async_disk_delete.wait()
+
+            # vm = compute_client.virtual_machines.get('blast', vm_name + "-vm")
+            # async_vm_delete = compute_client.virtual_machines.begin_delete('blast', vm_name + "-vm")
+            # async_vm_delete.wait()
+
+            # async_nic_delete = network_client.network_interfaces.begin_delete('blast', vm_name + "-nic")
+            # async_nic_delete.wait()
+                # Obtén la interfaz de red primero
+            network_interface = network_client.network_interfaces.get('blast', vm_name + "-nic")
+
+            # Actualiza las configuraciones de IP
+            for config in network_interface.ip_configurations:
+                config.public_ip_address = None
+
+            # Actualiza la interfaz de red con la nueva configuración
+            network_client.network_interfaces.begin_create_or_update('blast', vm_name + "-nic", network_interface)
+
+            vm = compute_client.virtual_machines.get('blast', vm_name + "-vm")
+            async_vm_delete = compute_client.virtual_machines.begin_delete('blast', vm_name + "-vm")
+            async_vm_delete.wait()
+
+            async_nic_delete = network_client.network_interfaces.begin_delete('blast', vm_name + "-nic")
+            async_nic_delete.wait()
+
+            disk_name = vm.storage_profile.os_disk.name
+            compute_client.disks.begin_delete('blast', disk_name)
+
+            network_client.public_ip_addresses.begin_delete('blast', vm_name + "-ip")
+
+        except Exception as e:
+            abort(500, message=f"An error ocurred while powering off an vm: {str(e)}")
+
+        return {"message": "VM Removed"}, 200
+    

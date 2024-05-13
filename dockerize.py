@@ -13,9 +13,9 @@ def install_docker(server_ip):
         print(stderr.read().decode('utf-8'))
 
         # Install docker.io
-        _, stdout, stderr = ssh.exec_command('sudo DEBIAN_FRONTEND=noninteractive apt-get install -y docker.io docker-compose')
-        print(stdout.read().decode('utf-8'))
-        print(stderr.read().decode('utf-8'))
+        # _, stdout, stderr = ssh.exec_command('sudo DEBIAN_FRONTEND=noninteractive apt-get install -y docker.io docker-compose')
+        # print(stdout.read().decode('utf-8'))
+        # print(stderr.read().decode('utf-8'))
         
         return {"message": f'Docker on {server_ip} was installed successfully.'}
     except Exception as e:
@@ -36,14 +36,14 @@ def run_blast(server_ip):
         print(stderr.read().decode('utf-8'))
 
         # Build docker image
-        _, stdout, stderr = ssh.exec_command('sudo DEBIAN_FRONTEND=noninteractive docker-compose -f blast/docker-compose.yml build')
-        print(stdout.read().decode('utf-8'))
-        print(stderr.read().decode('utf-8'))
+        # _, stdout, stderr = ssh.exec_command('sudo DEBIAN_FRONTEND=noninteractive docker-compose -f blast/docker-compose.yml build')
+        # print(stdout.read().decode('utf-8'))
+        # print(stderr.read().decode('utf-8'))
 
         # Start docker container in detached mode
-        _, stdout, stderr = ssh.exec_command('sudo DEBIAN_FRONTEND=noninteractive docker-compose -f blast/docker-compose.yml up -d')
-        print(stdout.read().decode('utf-8'))
-        print(stderr.read().decode('utf-8'))
+        # _, stdout, stderr = ssh.exec_command('sudo DEBIAN_FRONTEND=noninteractive docker-compose -f blast/docker-compose.yml up -d')
+        # print(stdout.read().decode('utf-8'))
+        # print(stderr.read().decode('utf-8'))
 
         return {"message": f'Docker container {server_ip} it\'s now running.'}
     except Exception as e:

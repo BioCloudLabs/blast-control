@@ -244,34 +244,11 @@ class PowerOffVm(MethodView):
         """
 
         try:
-            # network_interface = network_client.network_interfaces.get('blast', vm_name + "-nic")
-
-            # for config in network_interface.ip_configurations:
-            #     config.public_ip_address = None
-
-            # network_client.network_interfaces.begin_create_or_update('blast', vm_name + "-nic", network_interface)
-
-            # async_ip_delete = network_client.public_ip_addresses.begin_delete('blast', vm_name + "-ip")
-            # async_ip_delete.wait()
-
-            # disk_name = vm.storage_profile.os_disk.name
-            # async_disk_delete = compute_client.disks.begin_delete('blast', disk_name)
-            # async_disk_delete.wait()
-
-            # vm = compute_client.virtual_machines.get('blast', vm_name + "-vm")
-            # async_vm_delete = compute_client.virtual_machines.begin_delete('blast', vm_name + "-vm")
-            # async_vm_delete.wait()
-
-            # async_nic_delete = network_client.network_interfaces.begin_delete('blast', vm_name + "-nic")
-            # async_nic_delete.wait()
-                # Obtén la interfaz de red primero
             network_interface = network_client.network_interfaces.get('blast', vm_name + "-nic")
 
-            # Actualiza las configuraciones de IP
             for config in network_interface.ip_configurations:
                 config.public_ip_address = None
 
-            # Actualiza la interfaz de red con la nueva configuración
             network_client.network_interfaces.begin_create_or_update('blast', vm_name + "-nic", network_interface)
 
             vm = compute_client.virtual_machines.get('blast', vm_name + "-vm")

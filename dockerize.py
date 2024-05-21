@@ -4,6 +4,8 @@ from apscheduler.schedulers.background import BackgroundScheduler
 import signal
 import sys
 
+scheduler = None
+
 def check_vm_status(vm_name):
     global scheduler
     url = f'http://localhost:5000/api/azurevm/check/{vm_name}'
@@ -18,7 +20,7 @@ def check_vm_status(vm_name):
             if scheduler:
                 scheduler.shutdown()
             print("Scheduler stopped because VM is powered off.")
-            sys.exit(0)
+            return
     except requests.exceptions.RequestException as e:
         print(f"Error occurred while fetching VM status: {e}")
 
@@ -87,7 +89,15 @@ def run_blast(server_ip, server_name):
     finally:
         ssh.close()
 
+def stop_scheduler(signum, frame):
+    global scheduler
+    if scheduler:
+        scheduler.shutdown()
+    print("Scheduler se ha parado TEST")
+    sys.exit(0)
+
 def setup_and_run(server_ip, server_name):
+
     install_docker_output = install_docker(server_ip, server_name)
     if "error" in install_docker_output:
         return install_docker_output

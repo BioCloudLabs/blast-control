@@ -9,3 +9,4 @@ flask-cors
 flask-smorest
 python-dotenv
 gunicorn
+apscheduler

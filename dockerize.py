@@ -8,7 +8,7 @@ scheduler = None
 
 def check_vm_status(vm_name):
     global scheduler
-    url = f'http://localhost:5000/api/azurevm/check/{vm_name}'
+    url = f'https://biocloudlabs.es/api/azurevm/check/{vm_name}'
     try:
         response = requests.get(url)
         response.raise_for_status()  # Raise an exception for HTTP errors
@@ -28,7 +28,7 @@ def install_docker(server_ip, vm_name):
     ssh = paramiko.SSHClient()
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     try:
-        pkey = paramiko.RSAKey.from_private_key_file("/home/christiangoac/.ssh/id_rsa")
+        pkey = paramiko.RSAKey.from_private_key_file("/home/aychal943/.ssh/id_rsa")
         ssh.connect(server_ip, username="azure", pkey=pkey, look_for_keys=False)
 
         # Update the apt package index and install packages to allow apt to use a repository over HTTPS
@@ -56,7 +56,7 @@ def run_blast(server_ip, server_name):
     ssh = paramiko.SSHClient()
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     try:
-        pkey = paramiko.RSAKey.from_private_key_file("/home/christiangoac/.ssh/id_rsa")
+        pkey = paramiko.RSAKey.from_private_key_file("/home/aychal943/.ssh/id_rsa")
         ssh.connect(server_ip, username="azure", pkey=pkey, look_for_keys=False)
 
         # Clone blast repo

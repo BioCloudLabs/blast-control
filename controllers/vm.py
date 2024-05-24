@@ -80,7 +80,7 @@ TEMPLATE_BODY = {
       "location": "[parameters('location')]",
       "properties": {
         "hardwareProfile": {
-          "vmSize": "Standard_B1s"
+          "vmSize": "Standard_B2s"
         },
         "storageProfile": {
           "osDisk": {
